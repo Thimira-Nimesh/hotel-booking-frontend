@@ -1,0 +1,7 @@
+header {
+  width: 100%;
+  background-color: rgb(131, 74, 177);
+  display: flex;
+  position: relative;
+  height: 70px;
+}

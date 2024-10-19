@@ -1,10 +1,19 @@
-import Header from "./components/header.jsx";
+import AdminPage from "./pages/admin/adminPage.jsx";
+import HomePage from "./pages/client/homePage.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Header />
-    </>
+    <BrowserRouter>
+      <Routes path="/">
+        <Route path="/" element={<HomePage />}></Route>
+        <Route path="/admin/*" element={<AdminPage />}></Route>
+        <Route
+          path="/*"
+          element={<div className="w-full h-[100vh] bg-red-500"></div>}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
