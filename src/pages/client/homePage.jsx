@@ -1,23 +1,23 @@
 import Header from "../../components/header/header";
+import { Link, Route, Routes } from "react-router-dom";
+import Login from "./loginPage";
+import Register from "./registerPage";
 
 export default function HomePage() {
   return (
     <>
       <Header />
-      <div className="w-full h-screen bg-blue-700 flex flex-col items-center">
-        <div className="border border-white bg-white h-[100px] w-[700px] rounded-lg flex justify-center items-center">
-          <input className="" type="date"></input>
-          <input type="date"></input>
-          <select>
-            <option>Standard</option>
-            <option>Deluxe</option>
-            <option>Luxery</option>
-          </select>
-          <button>Book Now</button>
+      <div className="w-full bg-green-400 h-[50px]">
+        <div className="border border-white">
+          <Link className="mr-12" to={"/login"}>
+            Login
+          </Link>
+          <Link to={"/register"}>Register</Link>
         </div>
-        <h1 className="text-white text-[50px]">
-          Welcome to the Natural Beauty Villa
-        </h1>
+        <Routes path={"/*"}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
       </div>
     </>
   );

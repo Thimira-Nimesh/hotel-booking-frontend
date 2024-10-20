@@ -1,4 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
+import Rooms from "./roomsPage";
+import Bookings from "./bookingsPage";
+import Categories from "./categoriesPage";
 
 export default function AdminPage() {
   return (
@@ -7,25 +10,15 @@ export default function AdminPage() {
         <Link className="mr-12" to={"/admin/rooms"}>
           Rooms
         </Link>
-        <Link to={"/admin/bookings"}>bookings</Link>
+        <Link className="mr-12" to={"/admin/bookings"}>
+          bookings
+        </Link>
+        <Link to={"/admin/categories"}>categories</Link>
       </div>
       <Routes path="/*">
-        <Route
-          path="/rooms"
-          element={
-            <div>
-              <h1>Rooms Page</h1>
-            </div>
-          }
-        />
-        <Route
-          path="/bookings"
-          element={
-            <div>
-              <h1>Bookings Page</h1>
-            </div>
-          }
-        />
+        <Route path="/rooms" element={<Rooms />} />
+        <Route path="/bookings" element={<Bookings />} />
+        <Route path="/categories" element={<Categories />} />
       </Routes>
     </div>
   );
