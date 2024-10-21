@@ -1,4 +1,4 @@
-export default function Categories() {
+export default function AdminCategories() {
   return (
     <>
       <div className="border border-white bg-white h-[100px] w-[700px] rounded-lg flex justify-center items-center">
