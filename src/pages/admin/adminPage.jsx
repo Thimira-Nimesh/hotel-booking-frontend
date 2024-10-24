@@ -19,7 +19,7 @@ export default function AdminPage() {
   return (
     <div className="w-full max-h-[100vh] overflow-hidden overflow-y-hidden flex">
       {/* Sidebar */}
-      <div className="w-[20%] bg-amber-900 h-[100vh] flex flex-col gap-4 p-6">
+      <div className="w-[18%] bg-blue-600 h-[100vh] flex flex-col gap-4 p-6">
         {/* Bookings Link */}
         <div className="text-white text-[30px] hover:font-bold flex items-center gap-2">
           <Link to="/admin/bookings" className="flex items-center gap-2">
@@ -64,7 +64,7 @@ export default function AdminPage() {
         </div>
       </div>
       {/* Main Content Area */}
-      <div className="w-[80%] bg-blue-400 h-[100vh] overflow-y-scroll">
+      <div className="w-[82%] bg-blue-400 h-[100vh] overflow-y-scroll">
         <Routes path="/">
           <Route path="/bookings" element={<AdminBookings />} />
           <Route path="/categories" element={<AdminCategories />} />
