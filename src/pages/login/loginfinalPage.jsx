@@ -18,8 +18,11 @@ export default function LoginPages() {
         console.log(res.data);
         localStorage.setItem("token", res.data.token);
 
-        const token = localStorage.getItem("token");
-        console.log(token);
+        // if (res.data.user.userType == "customer") {
+        //   window.location.href = "/";
+        // } else if (res.data.user.userType == "admin") {
+        //   window.location.href = "/admin";
+        // }
       })
       .catch((err) => {
         console.log(err);
