@@ -64,7 +64,10 @@ export default function CategoriesPage() {
                 )}
               </td>
               <td>
-                <button onClick={() => deleteItem(category.name)}>
+                <button
+                  className="bg-red-500 rounded-lg px-4 py-1 ml-2 text-white"
+                  onClick={() => deleteItem(category.name)}
+                >
                   Delete
                 </button>
               </td>
