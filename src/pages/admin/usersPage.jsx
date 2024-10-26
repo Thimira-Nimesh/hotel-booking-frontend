@@ -7,7 +7,7 @@ export default function ViewUsers() {
   // Fetch users when the component loads
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users")
+      .get(import.meta.env.VITE_BACKEND_URL + "/api/users")
       .then((res) => {
         setUsers(res.data.list); // assuming your API returns an array of users
       })
