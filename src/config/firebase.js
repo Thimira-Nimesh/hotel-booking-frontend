@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyA3H-sRAaSX52qJtN-Ztk-inYt7mGxcwIc",
-  authDomain: "hotel-hub79.firebaseapp.com",
-  projectId: "hotel-hub79",
-  storageBucket: "hotel-hub79.appspot.com",
-  messagingSenderId: "289775264699",
-  appId: "1:289775264699:web:ea7b590574f69d76d89a9e",
+  apiKey: import.meta.env.API_KEY,
+  authDomain: import.meta.env.AUTH_DOMAIN,
+  projectId: import.meta.env.PROJECTID,
+  storageBucket: import.meta.env.STORAGEBUCKET,
+  messagingSenderId: import.meta.env.MESSAGINGSENDERID,
+  appId: import.meta.env.APPID,
 };
 
 // Initialize Firebase
