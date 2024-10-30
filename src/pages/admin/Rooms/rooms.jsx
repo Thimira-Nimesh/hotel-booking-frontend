@@ -13,7 +13,7 @@ export default function GetRooms() {
         setIsRoomLoaded(true);
       });
     }
-  }, []);
+  }, [isRoomLoaded]);
 
   function deleteRoom(roomId) {
     axios
