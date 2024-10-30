@@ -1,24 +1,26 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function AddRoom() {
+export default function AddBooking() {
+  const [bookingId, setBookingId] = useState("");
   const [roomId, setRoomId] = useState("");
-  const [category, setCategory] = useState("");
-  const [maxGuests, setMaxGuests] = useState(3);
-  const [available, setAvailable] = useState(true);
-  const [img, setImg] = useState("");
-  const [specialDescription, setSpecialDescription] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("Pending");
+  const [reason, setReason] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
   const [notes, setNotes] = useState("");
 
-  function handleRoomSubmit() {
+  function handleBooking() {
     axios
-      .post("http://localhost:5000/api/rooms", {
+      .post(import.meta.env.VITE_BACKEND_URL + "/api/bookings", {
+        bookingId: bookingId,
         roomId: roomId,
-        category: category,
-        maxGuests: maxGuests,
-        available: available,
-        img: img.split(","), // assuming comma-separated URLs
-        specialDescription: specialDescription,
+        email: email,
+        status: status,
+        reason: reason,
+        checkInDate: checkInDate,
+        checkOutDate: checkOutDate,
         notes: notes,
       })
       .then((res) => {
@@ -33,8 +35,26 @@ export default function AddRoom() {
     <div className="min-h-screen bg-gray-900 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-[500px]">
         <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
-          Add Room
+          Add Booking
         </h2>
+
+        {/* Booking ID */}
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="bookingId"
+          >
+            Booking ID
+          </label>
+          <input
+            id="bookingId"
+            type="number"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            placeholder="Enter booking ID"
+            value={bookingId}
+            onChange={(e) => setBookingId(e.target.value)}
+          />
+        </div>
 
         {/* Room ID */}
         <div className="mb-4">
@@ -54,98 +74,97 @@ export default function AddRoom() {
           />
         </div>
 
-        {/* Category */}
+        {/* Email */}
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-medium mb-2"
-            htmlFor="category"
+            htmlFor="email"
           >
-            Category
+            Email
           </label>
           <input
-            id="category"
-            type="text"
+            id="email"
+            type="email"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter room category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            placeholder="Enter email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
-        {/* Max Guests */}
+        {/* Status */}
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-medium mb-2"
-            htmlFor="maxGuests"
+            htmlFor="status"
           >
-            Maximum Guests
-          </label>
-          <input
-            id="maxGuests"
-            type="number"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter maximum guests"
-            value={maxGuests}
-            onChange={(e) => setMaxGuests(e.target.value)}
-          />
-        </div>
-
-        {/* Availability */}
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-sm font-medium mb-2"
-            htmlFor="available"
-          >
-            Available
+            Status
           </label>
           <select
-            id="available"
+            id="status"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            value={available}
-            onChange={(e) => setAvailable(e.target.value === "true")}
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
           >
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Cancelled">Cancelled</option>
           </select>
         </div>
 
-        {/* Images */}
+        {/* Reason */}
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-medium mb-2"
-            htmlFor="img"
+            htmlFor="reason"
           >
-            Room Images (comma-separated URLs)
+            Reason
           </label>
-          <input
-            id="img"
-            type="text"
+          <textarea
+            id="reason"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter image URLs"
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
+            placeholder="Enter reason"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
           />
         </div>
 
-        {/* Special Description */}
+        {/* Check-In Date */}
         <div className="mb-4">
           <label
             className="block text-gray-700 text-sm font-medium mb-2"
-            htmlFor="specialDescription"
+            htmlFor="checkInDate"
           >
-            Special Description
+            Check-In Date
           </label>
-          <textarea
-            id="specialDescription"
+          <input
+            id="checkInDate"
+            type="date"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter any special description"
-            value={specialDescription}
-            onChange={(e) => setSpecialDescription(e.target.value)}
+            value={checkInDate}
+            onChange={(e) => setCheckInDate(e.target.value)}
+          />
+        </div>
+
+        {/* Check-Out Date */}
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-medium mb-2"
+            htmlFor="checkOutDate"
+          >
+            Check-Out Date
+          </label>
+          <input
+            id="checkOutDate"
+            type="date"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            value={checkOutDate}
+            onChange={(e) => setCheckOutDate(e.target.value)}
           />
         </div>
 
         {/* Notes */}
-        <div className="mb-4">
+        <div className="mb-6">
           <label
             className="block text-gray-700 text-sm font-medium mb-2"
             htmlFor="notes"
@@ -155,7 +174,7 @@ export default function AddRoom() {
           <textarea
             id="notes"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Enter any additional notes"
+            placeholder="Additional notes (optional)"
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
           />
@@ -163,9 +182,9 @@ export default function AddRoom() {
 
         <button
           className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
-          onClick={handleRoomSubmit}
+          onClick={handleBooking}
         >
-          Add Room
+          Add Booking
         </button>
       </div>
     </div>

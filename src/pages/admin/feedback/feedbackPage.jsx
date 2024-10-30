@@ -9,7 +9,7 @@ export default function AddFeedback() {
 
   function handleFeedback() {
     axios
-      .post("http://localhost:5000/api/feedback", {
+      .post(import.meta.env.VITE_BACKEND_URL + "/api/feedback", {
         feedbackId: feedbackId,
         userId: userId,
         userName: userName,

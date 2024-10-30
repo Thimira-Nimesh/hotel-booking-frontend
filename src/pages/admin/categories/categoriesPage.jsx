@@ -10,7 +10,7 @@ export default function AddCategory() {
 
   function handleCategories() {
     axios
-      .post("http://localhost:5000/api/category", {
+      .post(import.meta.env.VITE_BACKEND_URL + "/api/category", {
         name: name,
         price: price,
         features: features,

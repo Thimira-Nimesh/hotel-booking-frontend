@@ -16,7 +16,7 @@ export default function SignUp() {
 
   function handleSubmit() {
     axios
-      .post("http://localhost:5000/api/users", {
+      .post(import.meta.env.VITE_BACKEND_URL + "/api/users", {
         firstName: firstName,
         lastName: lastName,
         email: email,
