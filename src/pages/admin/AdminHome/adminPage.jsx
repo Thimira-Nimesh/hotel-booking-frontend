@@ -14,6 +14,8 @@ import AdminRooms from "../roomsPage";
 import AdminUsers from "../Users/usersPage";
 import AdminFeedback from "../feedback/feedbackPage";
 import AdminGallery from "../Gallery/galleryPage";
+import CategoriesPage from "../categories/categories";
+import AddCategory from "../categories/categoriesPage";
 
 export default function AdminPage() {
   return (
@@ -67,7 +69,8 @@ export default function AdminPage() {
       <div className="w-[82%] bg-blue-400 h-[100vh] overflow-y-scroll">
         <Routes path="/">
           <Route path="/bookings" element={<AdminBookings />} />
-          <Route path="/categories" element={<AdminCategories />} />
+          <Route path="/categories" element={<CategoriesPage />} />
+          <Route path="/add-categories" element={<AddCategory />} />
           <Route path="/rooms" element={<AdminRooms />} />
           <Route path="/users" element={<AdminUsers />} />
           <Route path="/feedbacks" element={<AdminFeedback />} />
