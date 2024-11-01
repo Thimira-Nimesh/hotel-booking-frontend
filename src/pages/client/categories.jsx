@@ -13,6 +13,11 @@ export default function CategoriesPage() {
           console.log(res);
           setCategories(res.data.categories);
           setCategoryIsLoaded(true);
+        })
+        .catch((err) => {
+          res.json({
+            message: err,
+          });
         });
     }
   }, [categoryIsLoaded]);

@@ -10,7 +10,7 @@ import {
 import { CiImageOn } from "react-icons/ci";
 import AdminBookings from "../Bookings/bookingsPage";
 import AdminCategories from "../categories/categoriesPage";
-import AdminRooms from "../Rooms/roomsPage";
+import AdminRooms from "../roomsPage";
 import AdminUsers from "../Users/usersPage";
 import AdminFeedback from "../feedback/feedbackPage";
 import AdminGallery from "../Gallery/galleryPage";
