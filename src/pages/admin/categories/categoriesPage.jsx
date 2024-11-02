@@ -10,6 +10,7 @@ export default function AddCategory() {
   const [features, setFeatures] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const token = localStorage.getItem("token");
   if (token == null) {
@@ -20,22 +21,9 @@ export default function AddCategory() {
     setImage(e.target.files[0]);
   };
 
-  // function handleCategories() {
-  //   axios
-  //     .post(import.meta.env.VITE_BACKEND_URL + "/api/category", {
-  //       name: name,
-  //       price: price,
-  //       features: features,
-  //       description: description,
-  //       image: image,
-  //     })
-  //     .then((res) => {
-  //       console.log(res);
-  //     });
-  // }
-
   function handlesubmit(e) {
     e.preventDefault();
+    setIsLoading(true);
     console.log("Form Submitted");
 
     const featuresArray = features.split(",");
@@ -65,6 +53,7 @@ export default function AddCategory() {
           )
           .then((res) => {
             console.log(res);
+            setIsLoading(false);
           });
       });
     });
@@ -173,10 +162,14 @@ export default function AddCategory() {
           </div>
 
           <button
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
+            className="w-full px-4 mt-4  bg-blue-500 text-white py-2 rounded hover:bg-blue-600 flex justify-center "
             type="submit"
           >
-            Add Category
+            {isLoading ? (
+              <div className="border-t-2 border-t-white w-[20px] min-h-[20px] rounded-full animate-spin  items-center "></div>
+            ) : (
+              <span>Add Category</span>
+            )}
           </button>
         </form>
       </div>

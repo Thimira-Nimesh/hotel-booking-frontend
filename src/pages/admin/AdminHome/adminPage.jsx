@@ -10,12 +10,13 @@ import {
 import { CiImageOn } from "react-icons/ci";
 import AdminBookings from "../Bookings/bookingsPage";
 import AdminCategories from "../categories/categoriesPage";
-import AdminRooms from "../roomsPage";
+import AdminRooms from "../Rooms/roomsPage";
 import AdminUsers from "../Users/usersPage";
 import AdminFeedback from "../feedback/feedbackPage";
 import AdminGallery from "../Gallery/galleryPage";
 import CategoriesPage from "../categories/categories";
 import AddCategory from "../categories/categoriesPage";
+import GetGallery from "../Gallery/GalleryList";
 
 export default function AdminPage() {
   return (
@@ -59,7 +60,7 @@ export default function AdminPage() {
         </div>
         {/* GalleryItems Link */}
         <div className="text-white text-[30px] hover:font-bold flex items-center gap-2">
-          <Link className="flex items-center gap-2" to={"/admin/gallery"}>
+          <Link className="flex items-center gap-2" to={"/admin/view-gallery"}>
             <CiImageOn />
             GalleryItems
           </Link>
@@ -74,7 +75,8 @@ export default function AdminPage() {
           <Route path="/rooms" element={<AdminRooms />} />
           <Route path="/users" element={<AdminUsers />} />
           <Route path="/feedbacks" element={<AdminFeedback />} />
-          <Route path="/gallery" element={<AdminGallery />} />
+          <Route path="/add-gallery" element={<AdminGallery />} />
+          <Route path="/view-gallery" element={<GetGallery />} />
         </Routes>
       </div>
     </div>

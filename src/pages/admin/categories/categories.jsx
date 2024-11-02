@@ -8,7 +8,7 @@ export default function CategoriesPage() {
   const token = localStorage.getItem("token");
 
   if (token == null) {
-    window.location.href = "/login";
+    navigate("/login");
   }
 
   const [categories, setCategories] = useState([]);
