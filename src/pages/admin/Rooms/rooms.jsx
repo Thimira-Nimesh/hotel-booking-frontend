@@ -1,9 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export default function GetRooms() {
   const [rooms, setRooms] = useState([]);
   const [isRoomLoaded, setIsRoomLoaded] = useState(false);
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token");
+  if (token == null) {
+    navigate("/login");
+  }
 
   useEffect(() => {
     if (!isRoomLoaded) {
@@ -23,8 +31,18 @@ export default function GetRooms() {
       });
   }
 
+  function handlePlusClicked() {
+    navigate("/admin/add-rooms");
+  }
+
   return (
     <div className="container mx-auto px-4 py-6">
+      <button
+        className="w-[60px] h-[60px] rounded-full text-3xl  bg-green-400 flex justify-center items-center text-center fixed bottom-5 right-5"
+        onClick={handlePlusClicked}
+      >
+        <FaPlus color="white" />
+      </button>
       <h1 className="text-2xl font-semibold text-gray-800 mb-6">Rooms List</h1>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">

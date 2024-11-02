@@ -194,7 +194,7 @@ export default function AddRoom() {
             type="submit"
           >
             {isLoading ? (
-              <div className="border-t-2 border-t-white w-[20px] min-h-[20px] rounded-full animate-spin  items-center "></div>
+              <div className="border-t-2 border-t-white w-[20px] min-h-[20px] rounded-full animate-spin  items-center justify-center "></div>
             ) : (
               <span>Add Room</span>
             )}

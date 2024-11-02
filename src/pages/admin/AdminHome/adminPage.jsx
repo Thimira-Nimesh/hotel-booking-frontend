@@ -17,6 +17,7 @@ import AdminGallery from "../Gallery/galleryPage";
 import CategoriesPage from "../categories/categories";
 import AddCategory from "../categories/categoriesPage";
 import GetGallery from "../Gallery/GalleryList";
+import GetRooms from "../Rooms/rooms";
 
 export default function AdminPage() {
   return (
@@ -39,7 +40,7 @@ export default function AdminPage() {
         </div>
         {/* Rooms Link */}
         <div className="text-white text-[30px] hover:font-bold flex items-center gap-2">
-          <Link className="flex items-center gap-2" to={"/admin/rooms"}>
+          <Link className="flex items-center gap-2" to={"/admin/view-rooms"}>
             <MdRoomService />
             Rooms
           </Link>
@@ -72,7 +73,8 @@ export default function AdminPage() {
           <Route path="/bookings" element={<AdminBookings />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/add-categories" element={<AddCategory />} />
-          <Route path="/rooms" element={<AdminRooms />} />
+          <Route path="/add-rooms" element={<AdminRooms />} />
+          <Route path="/view-rooms" element={<GetRooms />} />
           <Route path="/users" element={<AdminUsers />} />
           <Route path="/feedbacks" element={<AdminFeedback />} />
           <Route path="/add-gallery" element={<AdminGallery />} />
