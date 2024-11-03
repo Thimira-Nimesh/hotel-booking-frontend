@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaPlus } from "react-icons/fa";
-import { Navigate, useNavigate } from "react-router-dom";
+import { FaEdit, FaPlus } from "react-icons/fa";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export default function GetGallery() {
   const [gallerylist, setGallerylist] = useState([]);
@@ -19,7 +19,6 @@ export default function GetGallery() {
       axios
         .get(import.meta.env.VITE_BACKEND_URL + "/api/gallery")
         .then((res) => {
-          console.log(res);
           console.log(res.data.gallerylist);
           setGallerylist(res.data.gallerylist);
           setIsGalleryIsLoaded(true);
@@ -29,7 +28,7 @@ export default function GetGallery() {
 
   function deleteItem(galleryId) {
     axios
-      .delete(import.meta.env.VITE_BACKEND_URL + "/api/gallery" + galleryId, {
+      .delete(import.meta.env.VITE_BACKEND_URL + "/api/gallery/" + galleryId, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -79,10 +78,17 @@ export default function GetGallery() {
                   />
                 </td>
                 <td className="p-4 text-gray-800">{item.description}</td>
-                <td className="px-6 py-4 border-b">
+                <td className="px-6 py-4 border-b flex">
+                  <Link
+                    className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition-colors ml-2"
+                    to={"/admin/update-gallery"}
+                    state={item}
+                  >
+                    <FaEdit />
+                  </Link>
                   <button
-                    className="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600 transition-colors"
-                    onClick={() => deleteItem(gallerylist.galleryId)}
+                    className="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600 transition-colors ml-2"
+                    onClick={() => deleteItem(item.galleryId)}
                   >
                     Delete
                   </button>

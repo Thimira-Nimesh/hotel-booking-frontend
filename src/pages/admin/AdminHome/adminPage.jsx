@@ -18,6 +18,8 @@ import CategoriesPage from "../categories/categories";
 import AddCategory from "../categories/categoriesPage";
 import GetGallery from "../Gallery/GalleryList";
 import GetRooms from "../Rooms/rooms";
+import UpdateCategory from "../categories/updateCategory";
+import UpdateGallery from "../Gallery/galleryListUpdate";
 
 export default function AdminPage() {
   return (
@@ -73,12 +75,14 @@ export default function AdminPage() {
           <Route path="/bookings" element={<AdminBookings />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/add-categories" element={<AddCategory />} />
+          <Route path="/update-categories" element={<UpdateCategory />} />
           <Route path="/add-rooms" element={<AdminRooms />} />
           <Route path="/view-rooms" element={<GetRooms />} />
           <Route path="/users" element={<AdminUsers />} />
           <Route path="/feedbacks" element={<AdminFeedback />} />
           <Route path="/add-gallery" element={<AdminGallery />} />
           <Route path="/view-gallery" element={<GetGallery />} />
+          <Route path="/update-gallery" element={<UpdateGallery />} />
         </Routes>
       </div>
     </div>

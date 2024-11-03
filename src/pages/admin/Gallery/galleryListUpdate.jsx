@@ -1,21 +1,23 @@
 import axios from "axios";
 import e from "cors";
 import { useState } from "react";
-import { Form, Navigate } from "react-router-dom";
+import { Form, Navigate, useLocation, useNavigate } from "react-router-dom";
 import uploadMedia from "../../../utils/mediaUpload";
 import { getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 
-export default function AdminGallery() {
-  const [galleryId, setGalleryId] = useState(0);
-  const [name, setName] = useState("");
+export default function UpdateGallery() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [galleryId, setGalleryId] = useState(location.state.galleryId);
+  const [name, setName] = useState(location.state.name);
   const [image, setImage] = useState([]);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(location.state.description);
   const [isLoading, setIsLoading] = useState(false);
 
   const token = localStorage.getItem("token");
   if (token == null) {
-    Navigate("/login");
+    navigate("/login");
   }
 
   const handleImage = (e) => {
@@ -25,38 +27,65 @@ export default function AdminGallery() {
   function handlesubmit(e) {
     e.preventDefault();
     setIsLoading(true);
-    uploadMedia(image).then((snapshot) => {
-      getDownloadURL(snapshot.ref).then((url) => {
-        console.log(url);
 
-        const galleryInfo = {
-          galleryId: galleryId,
-          name: name,
-          image: url,
-          description: description,
-        };
+    if (image == null) {
+      const galleryInfo = {
+        name: name,
+        image: location.state.image,
+        description: description,
+      };
+      axios
+        .put(
+          import.meta.env.VITE_BACKEND_URL + "/api/gallery/" + galleryId,
+          galleryInfo,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res);
+          setIsLoading(false);
+          toast.success("Gallery updated Successfully");
+          navigate("/admin/view-gallery");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      uploadMedia(image).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          console.log(url);
 
-        axios
-          .post(
-            import.meta.env.VITE_BACKEND_URL + "/api/gallery",
-            galleryInfo,
-            {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            }
-          )
-          .then((res) => {
-            console.log(res);
-            setIsLoading(false);
-            toast.success("Gallery Created Successfully");
-            Navigate("/admin/view-gallery");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+          const galleryInfo = {
+            name: name,
+            image: url,
+            description: description,
+          };
+
+          axios
+            .put(
+              import.meta.env.VITE_BACKEND_URL + "/api/gallery/" + galleryId,
+              galleryInfo,
+              {
+                headers: {
+                  Authorization: "Bearer " + token,
+                },
+              }
+            )
+            .then((res) => {
+              console.log(res);
+              setIsLoading(false);
+              toast.success("Gallery Created Successfully");
+              navigate("/admin/view-gallery");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        });
       });
-    });
+    }
   }
 
   return (

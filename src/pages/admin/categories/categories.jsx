@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { FaPlus } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { FaEdit, FaPlus } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function CategoriesPage() {
   const token = localStorage.getItem("token");
@@ -26,7 +26,7 @@ export default function CategoriesPage() {
           setCategoryIsLoaded(true);
         })
         .catch((err) => {
-          toast.error("Error Deleting Category");
+          toast.error("Error getting Category");
         });
     }
   }, [categoryIsLoaded]);
@@ -104,9 +104,16 @@ export default function CategoriesPage() {
                     "No image available"
                   )}
                 </td>
-                <td className="px-6 py-4 border-b">
+                <td className="px-6 py-4 border-b flex ml-2">
+                  <Link
+                    className="bg-blue-500 text-white rounded-lg px-4 py-2 hover:bg-blue-600 transition-colors"
+                    to={"/admin/update-categories"}
+                    state={category}
+                  >
+                    <FaEdit />
+                  </Link>
                   <button
-                    className="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600 transition-colors"
+                    className="bg-red-500 text-white rounded-lg px-4 py-2 hover:bg-red-600 transition-colors ml-2"
                     onClick={() => deleteItem(category.name)}
                   >
                     Delete
