@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import uploadMedia from "../../../utils/mediaUpload";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import e from "cors";
 import { getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 
 export default function AddRoom() {
+  const navigate = useNavigate();
   const [roomId, setRoomId] = useState("");
   const [category, setCategory] = useState("");
   const [maxGuests, setMaxGuests] = useState(3);
@@ -51,6 +52,7 @@ export default function AddRoom() {
           .then((res) => {
             console.log(res);
             setIsLoading(false);
+            navigate("/admin/view-rooms");
           })
           .catch((err) => {
             toast.error("Gallery Adding Error..."), err;

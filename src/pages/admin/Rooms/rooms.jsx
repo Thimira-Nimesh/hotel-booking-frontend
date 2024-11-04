@@ -1,13 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { Link, Route, Routes } from "react-router-dom";
 
 export default function GetRooms() {
+  const navigate = useNavigate();
   const [rooms, setRooms] = useState([]);
   const [isRoomLoaded, setIsRoomLoaded] = useState(false);
-  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
   if (token == null) {
@@ -16,18 +17,28 @@ export default function GetRooms() {
 
   useEffect(() => {
     if (!isRoomLoaded) {
-      axios.get(import.meta.env.VITE_BACKEND_URL + "/api/rooms").then((res) => {
-        console.log(res);
-        setRooms(res.data.roomslist);
-        setIsRoomLoaded(true);
-      });
+      axios
+        .get(import.meta.env.VITE_BACKEND_URL + "/api/rooms")
+        .then((res) => {
+          console.log(res.data.roomslist);
+          setRooms(res.data.roomslist);
+          setIsRoomLoaded(true);
+        })
+        .catch((err) => {
+          toast.error("Error Deleting Room");
+        });
     }
   }, [isRoomLoaded]);
 
   function deleteRoom(roomId) {
     axios
-      .delete(import.meta.env.VITE_BACKEND_URL + "/api/rooms/" + roomId)
+      .delete(import.meta.env.VITE_BACKEND_URL + "/api/rooms/" + roomId, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then(() => {
+        toast.success("Room Deleted Successfully..");
         setIsRoomLoaded(false);
       });
   }

@@ -45,7 +45,7 @@ export default function UpdateRoom() {
 
       axios
         .put(
-          import.meta.env.VITE_BACKEND_URL + "/api/rooms" + roomId,
+          import.meta.env.VITE_BACKEND_URL + "/api/rooms/" + roomId,
           roomDetails,
           {
             headers: {
@@ -57,6 +57,7 @@ export default function UpdateRoom() {
           console.log(res);
           setIsLoading(false);
           toast.success("Room Details Updated Successfully");
+          navigate("/admin/view-rooms");
         })
         .catch((err) => {
           toast.error("Room Update Error..."), err;
@@ -77,7 +78,7 @@ export default function UpdateRoom() {
 
           axios
             .put(
-              import.meta.env.VITE_BACKEND_URL + "/api/rooms" + roomId,
+              import.meta.env.VITE_BACKEND_URL + "/api/rooms/" + roomId,
               roomDetails,
               {
                 headers: {
@@ -89,6 +90,7 @@ export default function UpdateRoom() {
               console.log(res);
               setIsLoading(false);
               toast.success("Room Details Updated Successfully");
+              navigate("/admin/view-rooms");
             })
             .catch((err) => {
               toast.error("Room Update Error..."), err;
