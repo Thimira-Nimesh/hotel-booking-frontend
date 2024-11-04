@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaEdit, FaPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 
 export default function GetRooms() {
   const [rooms, setRooms] = useState([]);
@@ -85,10 +86,17 @@ export default function GetRooms() {
                 <td className="py-3 px-6 text-gray-700">
                   {room.notes || "N/A"}
                 </td>
-                <td className="py-3 px-6 text-center">
+                <td className="py-3 px-6 text-center flex">
+                  <Link
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    to={"/admin/update-rooms"}
+                    state={room}
+                  >
+                    <FaEdit />
+                  </Link>
                   <button
                     onClick={() => deleteRoom(room.roomId)}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-2"
                   >
                     Delete
                   </button>
