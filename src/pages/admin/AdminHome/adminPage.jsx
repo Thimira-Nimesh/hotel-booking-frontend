@@ -71,7 +71,7 @@ export default function AdminPage() {
         </div>
       </div>
       {/* Main Content Area */}
-      <div className="w-[82%] bg-blue-400 h-[100vh] overflow-y-scroll">
+      <div className="w-[82%] bg-green-400 h-[100vh] overflow-y-scroll">
         <Routes path="/">
           <Route path="/bookings" element={<AdminBookings />} />
           <Route path="/categories" element={<CategoriesPage />} />
