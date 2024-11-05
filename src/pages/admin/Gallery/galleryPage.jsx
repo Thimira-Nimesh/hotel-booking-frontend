@@ -1,12 +1,13 @@
 import axios from "axios";
 import e from "cors";
 import { useState } from "react";
-import { Form, Navigate } from "react-router-dom";
+import { Form, Navigate, useNavigate } from "react-router-dom";
 import uploadMedia from "../../../utils/mediaUpload";
 import { getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 
 export default function AdminGallery() {
+  const navigate = useNavigate();
   const [galleryId, setGalleryId] = useState(0);
   const [name, setName] = useState("");
   const [image, setImage] = useState([]);
@@ -15,7 +16,7 @@ export default function AdminGallery() {
 
   const token = localStorage.getItem("token");
   if (token == null) {
-    Navigate("/login");
+    navigate("/login");
   }
 
   const handleImage = (e) => {
@@ -50,7 +51,7 @@ export default function AdminGallery() {
             console.log(res);
             setIsLoading(false);
             toast.success("Gallery Created Successfully");
-            Navigate("/admin/view-gallery");
+            navigate("/admin/view-gallery");
           })
           .catch((err) => {
             console.log(err);
