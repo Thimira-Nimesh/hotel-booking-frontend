@@ -1,6 +1,6 @@
 import TestComponent from "./components/test/test.jsx";
 import AdminPage from "./pages/admin/AdminHome/adminPage.jsx";
-import HomePage from "./pages/client/homePage.jsx";
+import HomePage from "./pages/client/HomePage/homePage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LoginPages from "./pages/login/loginfinalPage.jsx";
 import SignUp from "./pages/signup/signUp.jsx";

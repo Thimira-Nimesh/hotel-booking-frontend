@@ -8,7 +8,6 @@ function UserTag(props) {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token != null) {
-      console.log(token);
       axios
         .get(import.meta.env.VITE_BACKEND_URL + "/api/users/", {
           headers: {
@@ -17,7 +16,6 @@ function UserTag(props) {
           },
         })
         .then((res) => {
-          console.log(res);
           setName(res.data.user.firstName);
           setUserFound(true);
         });
@@ -27,18 +25,30 @@ function UserTag(props) {
   }, [userFound]);
 
   return (
-    <div className="absolute right-0 flex items-center cursor-pointer mr-8 ">
-      <img className="rounded-full w-[75px] h-[75px] " src={props.imageLink} />
-      <span className="text-white ml-[5px] text-xl ">{name}</span>
-      <button
-        onClick={() => {
-          localStorage.removeItem("token");
-          setUserFound(false);
-        }}
-      >
-        Logout
-      </button>
+    <div className="absolute right-8 flex items-center space-x-4 bg-blue-600 p-3 rounded-lg shadow-md">
+      <img
+        className="rounded-full w-16 h-16 border-2 border-white"
+        src={props.imageLink}
+        alt="User Profile"
+      />
+      <div className="flex flex-raw items-center">
+        <span className="text-white text-lg font-semibold">
+          {name || "Guest"}
+        </span>
+        {userFound && (
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              setUserFound(false);
+            }}
+            className="text-blue-200 hover:text-white hover:bg-blue-700 transition-colors px-3 py-1 mt-1 rounded-lg text-sm font-medium ml-5"
+          >
+            Logout
+          </button>
+        )}
+      </div>
     </div>
   );
 }
+
 export default UserTag;
