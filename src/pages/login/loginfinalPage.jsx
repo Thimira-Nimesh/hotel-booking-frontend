@@ -1,10 +1,11 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import "../login/login.css";
 import SignUp from "../signup/signUp";
 import { useState } from "react";
 import axios from "axios";
 
 export default function LoginPages() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,9 +20,9 @@ export default function LoginPages() {
         localStorage.setItem("token", res.data.token);
 
         if (res.data.user.userType == "customer") {
-          window.location.href = "/";
+          navigate("/");
         } else if (res.data.user.userType == "admin") {
-          window.location.href = "/admin";
+          navigate("/admin");
         }
       })
       .catch((err) => {

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function UserTag(props) {
   const [name, setName] = useState("");
@@ -42,13 +43,25 @@ function UserTag(props) {
         <span className="text-white text-lg font-semibold">
           {name || "Guest"}
         </span>
+        <Link to="/login">
+          <button className="text-white bg-blue-500 hover:bg-blue-700 transition duration-300 py-2 px-4 rounded-md ml-4">
+            Login
+          </button>
+        </Link>
+
+        {/* Sign Up Button */}
+        <Link to="/signup">
+          <button className="text-white bg-blue-500 hover:bg-blue-700 transition duration-300 py-2 px-4 rounded-md ml-4">
+            Sign Up
+          </button>
+        </Link>
         {userFound && (
           <button
             onClick={() => {
               localStorage.removeItem("token");
               setUserFound(false);
             }}
-            className="text-blue-200 hover:text-white hover:bg-blue-700 transition-colors px-3 py-1 mt-1 rounded-lg text-sm font-medium ml-5"
+            className="text-white bg-blue-500 hover:bg-blue-700 transition duration-300 py-2 px-4 rounded-md ml-4"
           >
             Logout
           </button>
