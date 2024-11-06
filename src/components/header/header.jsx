@@ -1,4 +1,5 @@
 import UserTag from "../userData/userdata.jsx";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
@@ -8,11 +9,24 @@ function Header() {
         Ocean Serenity Inn
       </h1>
 
-      {/* User Tag */}
-      <UserTag
-        imageLink="https://cdn3.pixelcut.app/1/3/profile_picture_1728ecf2bd.jpg"
-        className="flex items-center space-x-4"
-      />
+      <div className="flex items-center space-x-4">
+        {/* Login Button */}
+        <Link to="/login">
+          <button className="text-white bg-blue-500 hover:bg-blue-700 transition duration-300 py-2 px-4 rounded-md">
+            Login
+          </button>
+        </Link>
+
+        {/* Sign Up Button */}
+        <Link to="/signup">
+          <button className="text-white bg-blue-500 hover:bg-blue-700 transition duration-300 py-2 px-4 rounded-md">
+            Sign Up
+          </button>
+        </Link>
+
+        {/* User Tag */}
+        <UserTag />
+      </div>
     </header>
   );
 }

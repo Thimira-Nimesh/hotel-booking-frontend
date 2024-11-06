@@ -42,6 +42,7 @@ export default function ViewUsers() {
           <table className="min-w-full table-auto bg-white border-collapse">
             <thead>
               <tr className="bg-gray-200">
+                <th className="px-4 py-2 text-gray-600">Profile Picture</th>
                 <th className="px-4 py-2 text-gray-600">First Name</th>
                 <th className="px-4 py-2 text-gray-600">Last Name</th>
                 <th className="px-4 py-2 text-gray-600">Email</th>
@@ -54,10 +55,21 @@ export default function ViewUsers() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
-                <tr key={user.id || user.email} className="border-b">
+              {users.map((user, index) => (
+                <tr key={index} className="border-b">
                   {" "}
                   {/* Use user.id if available */}
+                  <td className="px-6 py-4 border-b text-gray-800">
+                    {user.image ? (
+                      <img
+                        src={user.image}
+                        alt={user.name}
+                        className="w-12 h-12 object-cover rounded-md"
+                      />
+                    ) : (
+                      "No image available"
+                    )}
+                  </td>
                   <td className="px-4 py-2 text-gray-700">{user.firstName}</td>
                   <td className="px-4 py-2 text-gray-700">{user.lastName}</td>
                   <td className="px-4 py-2 text-gray-700">{user.email}</td>

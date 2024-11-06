@@ -3,26 +3,33 @@ import { useState, useEffect } from "react";
 
 function UserTag(props) {
   const [name, setName] = useState("");
+  const [image, setImage] = useState(null);
   const [userFound, setUserFound] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token != null) {
-      axios
-        .get(import.meta.env.VITE_BACKEND_URL + "/api/users/", {
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-        })
-        .then((res) => {
-          setName(res.data.user.firstName);
-          setUserFound(true);
-        });
-    } else {
-      setName("");
-    }
-  }, [userFound]);
+  useEffect(
+    (id) => {
+      const token = localStorage.getItem("token");
+      if (token != null) {
+        axios
+          .get(import.meta.env.VITE_BACKEND_URL + "/api/users/" + id, {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+          })
+          .then((res) => {
+            console.log(res);
+            console.log(res.data.user.firstName);
+
+            setName(res.data.user.firstName);
+            setUserFound(true);
+          });
+      } else {
+        setName("");
+      }
+    },
+    [userFound]
+  );
 
   return (
     <div className="absolute right-8 flex items-center space-x-4 bg-blue-600 p-3 rounded-lg shadow-md">

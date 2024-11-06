@@ -1,10 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import uploadMedia from "../../../utils/mediaUpload.js";
 import { getDownloadURL } from "firebase/storage";
 
 export default function AddCategory() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [features, setFeatures] = useState("");
@@ -14,7 +15,7 @@ export default function AddCategory() {
 
   const token = localStorage.getItem("token");
   if (token == null) {
-    Navigate("/login");
+    navigate("/login");
   }
 
   const handleImageChange = (e) => {
