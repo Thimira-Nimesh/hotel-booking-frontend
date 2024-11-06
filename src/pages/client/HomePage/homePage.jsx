@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import "../HomePage/homePage.css";
 import Header from "../../../components/header/header";
+import Footer from "../../../components/footer/footer";
 
 export default function HomePage() {
   return (
@@ -41,6 +42,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }
