@@ -66,7 +66,7 @@ export default function SignUp() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-900 pic-bg3">
-      <div className="absolute inset-0 bg-black opacity-40 w-full h-[680px] justify-center items-center"></div>
+      <div className="absolute inset-0 bg-black opacity-40 w-full h-[830px] justify-center items-center"></div>
       <div className="backdrop-blur-md p-8 rounded-lg shadow-lg w-[400px]">
         <h2 className="text-2xl font-semibold text-center text-white mb-6">
           Register
@@ -135,7 +135,7 @@ export default function SignUp() {
             />
           </div>
 
-          <div className="flex justify-between mb-4">
+          {/* <div className="flex justify-between mb-4">
             <label className="text-white text-sm font-medium flex items-center">
               <input
                 type="checkbox"
@@ -154,7 +154,7 @@ export default function SignUp() {
               />
               Disabled
             </label>
-          </div>
+          </div> */}
 
           <button
             type="submit"
