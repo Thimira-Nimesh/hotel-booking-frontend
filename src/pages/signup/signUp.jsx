@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 // import LoginPages from "../login/loginfinalPage";
+import "../signup/signup.css";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -64,174 +65,79 @@ export default function SignUp() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-[400px]">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
+    <div className="flex items-center justify-center min-h-screen bg-gray-900 pic-bg3">
+      <div className="absolute inset-0 bg-black opacity-40 w-full h-[830px] justify-center items-center"></div>
+      <div className="backdrop-blur-md p-8 rounded-lg shadow-lg w-[400px]">
+        <h2 className="text-2xl font-semibold text-center text-white mb-6">
           Register
         </h2>
         <form onSubmit={handleSubmit}>
-          {/* First Name */}
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="firstName"
-            >
+            <label className="block text-white text-sm font-medium mb-2">
               First Name
             </label>
             <input
-              id="firstName"
               type="text"
               value={firstName}
-              onChange={(e) => {
-                setFirstName(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => setFirstName(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-white"
               placeholder="Enter your first name"
             />
           </div>
 
-          {/* Last Name */}
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="lastName"
-            >
+            <label className="block text-white text-sm font-medium mb-2">
               Last Name
             </label>
             <input
-              id="lastName"
               type="text"
               value={lastName}
-              onChange={(e) => {
-                setLastName(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => setLastName(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-white"
               placeholder="Enter your last name"
             />
           </div>
 
-          {/* Email */}
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="email"
-            >
+            <label className="block text-white text-sm font-medium mb-2">
               Email
             </label>
             <input
-              id="email"
               type="email"
               value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-white"
               placeholder="Enter your email"
             />
           </div>
 
-          {/* Password */}
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="password"
-            >
+            <label className="block text-white text-sm font-medium mb-2">
               Password
             </label>
             <input
-              id="password"
               type="password"
               value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-white"
               placeholder="Enter your password"
             />
           </div>
 
-          {/* Image */}
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="image"
-            >
+            <label className="block text-white text-sm font-medium mb-2">
               Upload Profile Picture
             </label>
             <input
-              id="image"
               type="file"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               onChange={handleImageChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-800 text-white"
             />
           </div>
 
-          {/* WhatsApp */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="whatsapp"
-            >
-              WhatsApp
-            </label>
-            <input
-              id="whatsapp"
-              type="text"
-              value={whatsapp}
-              onChange={(e) => {
-                setWhatsapp(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Enter your WhatsApp number"
-            />
-          </div>
-
-          {/* Phone */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="phone"
-            >
-              Phone
-            </label>
-            <input
-              id="phone"
-              type="text"
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Enter your phone number"
-            />
-          </div>
-
-          {/* User Type */}
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-medium mb-2"
-              htmlFor="userType"
-            >
-              User Type
-            </label>
-            <select
-              id="userType"
-              value={userType}
-              onChange={(e) => {
-                setUserType(e.target.value);
-              }}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
-            </select>
-          </div>
-
-          {/* Email Verified */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-medium mb-2">
+          {/* <div className="flex justify-between mb-4">
+            <label className="text-white text-sm font-medium flex items-center">
               <input
-                id="emailVerified"
                 type="checkbox"
                 checked={emailVerified}
                 onChange={(e) => setEmailVerified(e.target.checked)}
@@ -239,13 +145,8 @@ export default function SignUp() {
               />
               Email Verified
             </label>
-          </div>
-
-          {/* Disabled */}
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-medium mb-2">
+            <label className="text-white text-sm font-medium flex items-center">
               <input
-                id="disabled"
                 type="checkbox"
                 checked={disabled}
                 onChange={(e) => setDisabled(e.target.checked)}
@@ -253,21 +154,24 @@ export default function SignUp() {
               />
               Disabled
             </label>
-          </div>
+          </div> */}
 
           <button
-            className="w-full px-4 mt-4  bg-blue-500 text-white py-2 rounded hover:bg-blue-600 flex justify-center "
             type="submit"
+            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300"
           >
             {isLoading ? (
-              <div className="border-t-2 border-t-white w-[20px] min-h-[20px] rounded-full animate-spin  items-center "></div>
+              <div className="border-t-2 border-t-white w-[20px] h-[20px] rounded-full animate-spin"></div>
             ) : (
-              <span>Sign-Up</span>
+              "Sign-Up"
             )}
           </button>
 
-          <p className="text-center text-gray-500 text-sm mt-4">
-            Already have an account? <Link to={"/login"}> Login</Link>
+          <p className="text-center text-white text-sm mt-4">
+            Already have an account?{" "}
+            <Link to={"/login"} className="text-blue-400">
+              Login
+            </Link>
           </p>
         </form>
       </div>
