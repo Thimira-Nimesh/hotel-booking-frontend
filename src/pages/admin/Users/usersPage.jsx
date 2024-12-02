@@ -2,20 +2,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function ViewUsers() {
+  // const token = localStorage.getItem("token");
+
   const [users, setUsers] = useState([]);
   const [userLogged, setUserLogged] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  useEffect(() => {
-    axios
-      .get(import.meta.env.VITE_BACKEND_URL + "/api/users/userlist")
-      .then((res) => {
-        setUsers(res.data.userlist);
-        setUserLogged(true);
-      })
-      .catch((error) => {
-        console.log("Error fetching users:", error);
-      });
-  }, [userLogged]);
+  useEffect(
+    () => {
+      axios
+        .post(
+          import.meta.env.VITE_BACKEND_URL + "/api/users/userlist",
+          {
+            pageNumber: page,
+            pageSize: 5,
+          }
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${token}`,
+          //   },
+          // }
+        )
+        .then((res) => {
+          setUsers(res.data.userlist);
+          setTotalPages(res.data.pagination.totalPages);
+          setUserLogged(true);
+        })
+        .catch((error) => {
+          console.log("Error fetching users:", error);
+        });
+    },
+    [page],
+    [userLogged]
+  );
 
   function deleteuser(firstName) {
     axios
@@ -136,6 +156,22 @@ export default function ViewUsers() {
               ))}
             </tbody>
           </table>
+          <div className="w-full flex justify-center items-center">
+            {Array.from({ length: totalPages }).map((item, index) => {
+              return (
+                <button
+                  className={`bg-blue-500 mx-[10px] w-[20px] h-[20px] flex text-center justify-center items-center mt-5 mb-5 text-white ${
+                    page == index + 1 && "border border-black"
+                  }`}
+                  onClick={() => {
+                    setPage(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
