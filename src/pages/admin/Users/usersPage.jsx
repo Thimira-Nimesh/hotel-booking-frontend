@@ -2,22 +2,40 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export default function ViewUsers() {
+  // const token = localStorage.getItem("token");
+
   const [users, setUsers] = useState([]);
   const [userLogged, setUserLogged] = useState(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
-  // Fetch users when the component loads
-  useEffect(() => {
-    axios
-      .get(import.meta.env.VITE_BACKEND_URL + "/api/users/userlist")
-      .then((res) => {
-        setUsers(res.data.usersList);
-        console.log(res.data.usersList);
-        setUserLogged(true);
-      })
-      .catch((error) => {
-        console.log("Error fetching users:", error);
-      });
-  }, [userLogged]);
+  useEffect(
+    () => {
+      axios
+        .post(
+          import.meta.env.VITE_BACKEND_URL + "/api/users/userlist",
+          {
+            pageNumber: page,
+            pageSize: 5,
+          }
+          // {
+          //   headers: {
+          //     Authorization: `Bearer ${token}`,
+          //   },
+          // }
+        )
+        .then((res) => {
+          setUsers(res.data.userlist);
+          setTotalPages(res.data.pagination.totalPages);
+          setUserLogged(true);
+        })
+        .catch((error) => {
+          console.log("Error fetching users:", error);
+        });
+    },
+    [page],
+    [userLogged]
+  );
 
   function deleteuser(firstName) {
     axios
@@ -31,69 +49,129 @@ export default function ViewUsers() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-6xl">
-        <h2 className="text-2xl font-semibold text-center text-gray-700 mb-6">
-          Current Users
+    <div className="min-h-screen bg-gradient-to-r from-indigo-600 to-purple-700 flex flex-col items-center">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-6xl ">
+        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+          User Management
         </h2>
 
-        {/* Table */}
         <div className="overflow-x-auto">
-          <table className="min-w-full table-auto bg-white border-collapse">
+          <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
             <thead>
-              <tr className="bg-gray-200">
-                <th className="px-4 py-2 text-gray-600">Profile Picture</th>
-                <th className="px-4 py-2 text-gray-600">First Name</th>
-                <th className="px-4 py-2 text-gray-600">Last Name</th>
-                <th className="px-4 py-2 text-gray-600">Email</th>
-                <th className="px-4 py-2 text-gray-600">Phone</th>
-                <th className="px-4 py-2 text-gray-600">WhatsApp</th>
-                <th className="px-4 py-2 text-gray-600">User Type</th>
-                <th className="px-4 py-2 text-gray-600">Email Verified</th>
-                <th className="px-4 py-2 text-gray-600">Disabled</th>
-                <th className="px-4 py-2 text-gray-600">Action</th>
+              <tr className="bg-indigo-500 text-white border-b border-gray-300">
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  Profile
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  First Name
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  Last Name
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  Email
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  Phone
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  WhatsApp
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  User Type
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  Verified
+                </th>
+                <th className="px-6 py-3 text-left font-medium border-r border-gray-300">
+                  Disabled
+                </th>
+                <th className="px-6 py-3 text-left font-medium">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <tr key={index} className="border-b">
-                  {" "}
-                  {/* Use user.id if available */}
-                  <td className="px-6 py-4 border-b text-gray-800">
+                <tr
+                  key={index}
+                  className={`${
+                    index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                  } border-b border-gray-300`}
+                >
+                  <td className="px-6 py-4 border-r border-gray-300 flex items-center">
                     {user.image ? (
                       <img
                         src={user.image}
-                        alt={user.name}
-                        className="w-12 h-12 object-cover rounded-md"
+                        alt={user.firstName}
+                        className="w-12 h-12 object-cover rounded-full shadow-md"
                       />
                     ) : (
-                      "No image available"
+                      <span className="text-gray-400 italic">No image</span>
                     )}
                   </td>
-                  <td className="px-4 py-2 text-gray-700">{user.firstName}</td>
-                  <td className="px-4 py-2 text-gray-700">{user.lastName}</td>
-                  <td className="px-4 py-2 text-gray-700">{user.email}</td>
-                  <td className="px-4 py-2 text-gray-700">{user.phone}</td>
-                  <td className="px-4 py-2 text-gray-700">{user.whatsapp}</td>
-                  <td className="px-4 py-2 text-gray-700">{user.userType}</td>
-                  <td className="px-4 py-2 text-gray-700">
-                    {user.emailVerified ? "Yes" : "No"}
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    {user.firstName}
                   </td>
-                  <td className="px-4 py-2 text-gray-700">
-                    {user.disabled ? "Yes" : "No"}
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    {user.lastName}
                   </td>
-                  <td className="px-4 py-2 text-gray-700">
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    {user.email}
+                  </td>
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    {user.phone}
+                  </td>
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    {user.whatsapp}
+                  </td>
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    {user.userType}
+                  </td>
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    <span
+                      className={`${
+                        user.emailVerified ? "text-green-500" : "text-red-500"
+                      } font-semibold`}
+                    >
+                      {user.emailVerified ? "Yes" : "No"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-gray-700 border-r border-gray-300">
+                    <span
+                      className={`${
+                        user.disabled ? "text-red-500" : "text-green-500"
+                      } font-semibold`}
+                    >
+                      {user.disabled ? "Yes" : "No"}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 text-gray-700">
                     <button
-                      onClick={() => {
-                        deleteuser(user.firstName);
-                      }}
-                      className="bg-red-500 rounded-lg px-4 py-1 ml-2 text-white"
-                    ></button>
+                      onClick={() => deleteuser(user.firstName)}
+                      className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-md shadow-md transition duration-300"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          <div className="w-full flex justify-center items-center">
+            {Array.from({ length: totalPages }).map((item, index) => {
+              return (
+                <button
+                  className={`bg-blue-500 mx-[10px] w-[20px] h-[20px] flex text-center justify-center items-center mt-5 mb-5 text-white ${
+                    page == index + 1 && "border border-black"
+                  }`}
+                  onClick={() => {
+                    setPage(index + 1);
+                  }}
+                >
+                  {index + 1}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

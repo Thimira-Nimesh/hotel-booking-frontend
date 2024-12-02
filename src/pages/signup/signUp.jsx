@@ -46,8 +46,6 @@ export default function SignUp() {
           whatsapp: whatsapp,
           phone: phone,
           userType: userType,
-          emailVerified: emailVerified,
-          disabled: disabled,
         };
 
         axios

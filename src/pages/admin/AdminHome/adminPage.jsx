@@ -24,9 +24,9 @@ export default function AdminPage() {
   return (
     <div className="flex w-full max-h-screen overflow-hidden">
       {/* Sidebar */}
-      <div className="w-[18%] bg-blue-700 h-screen flex flex-col gap-6 p-6 shadow-lg">
+      <div className="w-[16%] bg-blue-700 h-screen flex flex-col gap-6 p-6 shadow-lg">
         <h2 className="text-white text-2xl font-semibold mb-6">
-          Admin Dashboard
+          Ocean Serenity
         </h2>
 
         <div className="text-white text-[20px] hover:font-bold flex items-center gap-2">
