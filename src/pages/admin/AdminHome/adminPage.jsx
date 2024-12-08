@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { CiBookmarkCheck } from "react-icons/ci";
 import { BiUser } from "react-icons/bi";
 import {
@@ -21,12 +21,17 @@ import UpdateRoom from "../Rooms/updateRooms";
 import ViewUsers from "../Users/usersPage";
 
 export default function AdminPage() {
+  const navigate = useNavigate();
+
+  const ocean = () => {
+    navigate("/");
+  };
   return (
     <div className="flex w-full max-h-screen overflow-hidden">
       {/* Sidebar */}
       <div className="w-[16%] bg-blue-700 h-screen flex flex-col gap-6 p-6 shadow-lg">
         <h2 className="text-white text-2xl font-semibold mb-6">
-          Ocean Serenity
+          <button onClick={ocean}> Ocean Serenity</button>
         </h2>
 
         <div className="text-white text-[20px] hover:font-bold flex items-center gap-2">
